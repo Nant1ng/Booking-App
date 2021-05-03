@@ -9,6 +9,8 @@ function Registration() {
   };
 
   const [registerValues, setRegisterValues] = useState(intialValue);
+  const [username, setUsername] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
 
   // onchange ??
 
@@ -66,7 +68,7 @@ function Registration() {
  */
 
   return (
-    <div>
+    <>
       <div class="container max-w-full mx-auto md:py-24 px-6">
         <div class="max-w-sm mx-auto px-6">
           <div class="relative flex flex-wrap">
@@ -229,7 +231,7 @@ function Registration() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
