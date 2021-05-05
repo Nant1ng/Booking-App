@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
+import Login from "./Login";
 import axios from "axios";
 
+// useHistory
 function Registration() {
   const intialValue = {
-    username: " ",
-    email: " ",
+    username: "",
+    email: "",
     password: "",
   };
 
   const [registerValues, setRegisterValues] = useState(intialValue);
   const [username, setUsername] = useState("");
   const [loggedIn, SetLoggedIn] = useState(false);
+  const [error, setError] = useState("");
+  const history = useHistory();
 
   // onchange ??
 
@@ -20,6 +25,11 @@ function Registration() {
 
   function handleOnSubmit(e) {
     e.preventDefault();
+
+    // registerValues.username,
+
+    //??
+
     axios
       .post("http://localhost:1337/auth/local/register", {
         username: registerValues.username,
@@ -27,10 +37,13 @@ function Registration() {
         password: registerValues.password,
       })
       .then((e) => {
-        if (e.data.user) SetLoggedIn(true);
+        if (e.data.user)
+          //history.push("/login")
+          SetLoggedIn(true);
+        // redirect user login page
       })
       .catch((err) => {
-        console.log(err);
+        setError(err.response.data.message[0].messages[0].message);
       });
     // async ()=>  const response =   await axios.post()
     // response
@@ -65,12 +78,13 @@ function Registration() {
         //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjE5NzcxMTg0LCJleHAiOjE2MjIzNjMxODR9.TlS1oiLpE39bt3BImgdypSlmvwCrBbpb8XLcqGgfjms"
        
     }, [])
+changeToRegister
  */
 
   return (
     <>
       {loggedIn ? (
-        <div> Nu kan du logga in </div>
+        <Login />
       ) : (
         <div class="container max-w-full mx-auto md:py-24 px-6">
           <div class="max-w-sm mx-auto px-6">
@@ -100,6 +114,7 @@ function Registration() {
                         />
                       </div>
                       <div class="py-1">
+                        <div className="text-purple-600"> {error}</div>
                         <span class="px-1 text-sm text-gray-600">Email</span>
                         <input
                           placeholder=""
@@ -137,7 +152,7 @@ function Registration() {
                         />
                       </div>
                       <div class="flex justify-start">
-                        <label class="block text-gray-500 font-bold my-4 flex items-center">
+                        <label class="text-gray-500 font-bold my-4 flex items-center">
                           <input
                             class="leading-loose text-pink-600 top-0"
                             type="checkbox"
@@ -160,6 +175,7 @@ function Registration() {
                           </span>
                         </label>
                       </div>
+
                       <button
                         class="mt-3 text-lg font-semibold
             bg-gray-800 w-full text-white rounded-lg
