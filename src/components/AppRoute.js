@@ -3,7 +3,9 @@ import CardList from "./card/CardList";
 import Form from "./Form";
 import Menu from "./Menu";
 import Registration from "./Registration";
-import Login from "./Login"
+import Login from "./Login";
+
+import AddToCard from "./card/AddToCard";
 
 import { Route, BrowserRouter as Router } from "react-router-dom";
 // react-router-dom ??
@@ -16,10 +18,11 @@ export default function AppRoute() {
       <Router>
         <Menu />
 
-        <Route path="/" exact component={CardList} />
+        <Route path="/card" exact component={CardList} />
         <Route path="/form" component={Form} />
+        <Route path="/login" component={Login} />
         <Route path="/register" component={Registration} />
-        <Route path="/login" component= {Login} />
+        <Route path="/addproduct" component={AddToCard} />
       </Router>
     </>
   );
