@@ -25,10 +25,10 @@ function CardList() {
         return (
           <Card
             key={product.id}
+            image={product.img}
             productName={product.name}
-            price={product.Price}
-            description={product.Descriptions}
-            image={product.Image}
+            price={product.price}
+            description={product.description}
           />
         );
       })}
